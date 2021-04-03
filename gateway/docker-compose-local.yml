@@ -1,0 +1,11 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - 5431:5432
+    environment:
+      POSTGRES_DB: schneider
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA : /var/lib/postgresql/data/pgdata
