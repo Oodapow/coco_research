@@ -1,4 +1,4 @@
-package ro.upb.gateway.security;
+package ro.upb.gateway.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -8,8 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import ro.upb.gateway.entity.User;
-import ro.upb.gateway.repository.UserRepository;
+import ro.upb.gateway.model.User;
+import ro.upb.gateway.service.UserService;
 
 import java.util.Optional;
 
@@ -20,7 +20,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private static final String CREDENTIALS_MESSAGE_ERROR = "Invalid credentials!";
 
     private final BCryptPasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -34,11 +34,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private User verifyCredentials(final Authentication authentication) {
         final String authPassword = authentication.getCredentials().toString().trim();
-        final Optional<User> userOptional = userRepository.findByUsername(authentication.getName().trim());
+        final Optional<User> userOptional = userService.findByUsername(authentication.getName().trim());
 
         if (userOptional.isPresent()) {
             final User user = userOptional.get();
-            if (passwordEncoder.matches(authPassword, user.getPassword())) {
+            if (passwordEncoder.matches(authPassword, user.password())) {
                 return user;
             }
         }

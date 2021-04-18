@@ -1,4 +1,4 @@
-package ro.upb.gateway.entity;
+package ro.upb.userservice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

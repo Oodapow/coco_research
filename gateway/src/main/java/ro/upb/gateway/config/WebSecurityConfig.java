@@ -1,49 +1,45 @@
-package ro.upb.gateway.security;
+package ro.upb.gateway.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfigGateway extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final CustomAuthenticationProvider customAuthenticationProvider;
+
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/js/********","/css/*********","/js/*********","/image/*********",
-                "/vendor/*********", "/fonts/*********");
+        web.ignoring().antMatchers("/js/**", "/css/**", "/image/**", "/vendor/**", "/fonts/**");
     }
-    @Bean
-    public ServerCodecConfigurer serverCodecConfigurer() {
-        return ServerCodecConfigurer.create();
-    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(customAuthenticationProvider);
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().headers().frameOptions().sameOrigin().addHeaderWriter(
+                new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
         http
-                .headers().and()
                 .authorizeRequests()
-                .antMatchers("/login","/js/********","/css/*********","/js/*********","/image/*********",
-                        "/vendor/*********", "/fonts/*********").permitAll()
+                .antMatchers("/js/**", "/css/**", "/image/**", "/vendor/**", "/fonts/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").successForwardUrl("/")
+                .loginPage("/login").permitAll()
                 .failureUrl("/login?error=true")
-                .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/api/logout")
                 .permitAll();
     }
 }
