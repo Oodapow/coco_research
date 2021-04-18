@@ -1,9 +1,9 @@
-package ro.upb.gateway.repository;
+package ro.upb.userservice.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ro.upb.gateway.entity.User;
+import ro.upb.userservice.entity.User;
 
 import java.util.Optional;
 
