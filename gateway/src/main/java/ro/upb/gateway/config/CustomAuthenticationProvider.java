@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ro.upb.gateway.model.User;
 import ro.upb.gateway.service.UserService;
@@ -19,7 +20,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private static final String CREDENTIALS_MESSAGE_ERROR = "Invalid credentials!";
 
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder encoder;
     private final UserService userService;
 
     @Override
@@ -38,7 +39,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         if (userOptional.isPresent()) {
             final User user = userOptional.get();
-            if (passwordEncoder.matches(authPassword, user.password())) {
+            if (encoder.matches(authPassword, user.password())) {
                 return user;
             }
         }
