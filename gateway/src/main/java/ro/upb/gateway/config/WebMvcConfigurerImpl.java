@@ -7,16 +7,21 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebMvcConfigurerImpl implements WebMvcConfigurer {
+
+    private final Environment environment;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -44,10 +49,10 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
     }
 
     @Bean
-    public RestTemplate restTemplate() {
-        var restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(0, new MappingJackson2HttpMessageConverter(objectMapper()));
-
-        return restTemplate;
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.basicAuthentication(
+                environment.getProperty("resttemplate.username"),
+                environment.getProperty("resttemplate.password")).build();
     }
+
 }

@@ -15,7 +15,7 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         var user = restTemplate
-                .getForObject("http://localhost:8091/api/user-service/user/{username}", User.class, username);
+                .getForObject("http://localhost:8081/api/user-service/user/{username}", User.class, username);
         return Optional.ofNullable(user);
     }
 }
