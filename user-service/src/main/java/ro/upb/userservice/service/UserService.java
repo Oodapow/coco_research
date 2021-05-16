@@ -20,4 +20,11 @@ public class UserService {
         user.ifPresentOrElse(u -> log.debug("Found user: {}", u), () -> log.debug("No user found"));
         return userRepository.findByUsername(username);
     }
+
+    public User createNewUser(String username, String password) {
+        var user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        return userRepository.save(user);
+    }
 }
