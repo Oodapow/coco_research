@@ -25,9 +25,12 @@ const userData = {
 
 
 const User = () => {
-
     return (
         <>
+            <>
+                {userData.userName}
+                <img src={userData.userImage}/>
+            </>
             <div className='user-container'>
                 <UserTaggedImageTable userTaggedImages={userData.userTaggedImages}/>
             </div>
