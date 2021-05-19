@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/query-service/src/images/annotations_trainval2014/
+/query-service/src/images/annotations_trainval2014.zip

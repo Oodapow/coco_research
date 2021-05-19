@@ -6,6 +6,6 @@ services:
       - 5431:5432
     environment:
       POSTGRES_DB: tagger-userdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgresIdp
+      POSTGRES_PASSWORD: postgres1
       PGDATA : /var/lib/postgresql/data/pgdata
