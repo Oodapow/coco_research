@@ -37,7 +37,7 @@ class Data(Resource):
                     return jsonify(res)
                 else:
                     raise NoDataMatch(data, kargs['db'], kargs['col'])
-    
+
     def put(self, **kargs):
         start = time.time()
         data = request.get_json()
@@ -57,7 +57,7 @@ class Data(Resource):
             end = time.time()
             print(end-start)
             return jsonify(data)
-    
+
     def post(self, **kargs):
         data = request.get_json()
         with make_cl() as cl:
@@ -81,7 +81,7 @@ class Data(Resource):
                     if not col.update_one(search, {'$set': d}).matched_count:
                         raise KeyNotFound(str(key))
         return jsonify(data)
- 
+
     def delete(self, **kargs):
         with make_cl() as cl:
             db = cl[kargs['db']]

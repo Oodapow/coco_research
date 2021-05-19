@@ -4,3 +4,4 @@ pymongo
 flask_pymongo
 tqdm
 requests
+aiohttp
