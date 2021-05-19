@@ -1,0 +1,70 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+- Set-up Log database (PostgreSQL).																	--Alex--
+- Implement Log Model with coresponding properties (timestamp, service, operation, parameters).		--Estella--
+- Add Log Controller for log database queries.														--Estella--
+- Introduce log entries manipulation functionalities: add, remove, update.							--Estella--
+
+- Form validation for registration screen (user credentials).										--Estella--
+- Functionalty to add new user to database.															--Estella--
+- Functionalty to remove user from database.														--Estella--
+- New user registration page.																		--Estella--
+
+- Introduce dynamic mapping for tagging window functionalities "select", "create-point",			--Alex--
+ "create-box", "create-polygon", "create-line", "create-expanding-line",
+ "show-mask".
+- Change integration for adnotation component for Konva.js (update to dynamic integration).			--Gabriel--
+- Navigation component.																				--Gabriel--
+
+- Public availability for routes through reverse-proxy (Ngnix).										--Alex--
+- Management functionalitites (supervision, deployment, replication) through Kubernetes Dashboard.	--Alex--
+- Service repository separation.																	--Alex--
+- Add CI/CD functionality.																			--Alex--
+
+## [1.0.0] - 2021-09-08
+### Added
+- Gateway Service.														--Gabriel  & Estella--			
+- Login Controller for log in functionality.							--Edward--
+- User authentication and authorization.								--Edward--
+- Password encription through BCrypt encoding.							--Edward--
+- Form validation for login screen (user credentials).					--Edward--			
+- Test user role for development and testing purposes.					--Edward--
+
+
+- User database (PostreSQL).											--Edward--
+- SpringBoot connection to User database.								--Gabriel--
+- User Model with properties (id, username, password).					--Edward--
+
+- User Service.															--Gabriel & Estella--
+- User Controller for user database queries.							--Edward--
+- Function to fetch users from database by provided username.			--Edward--
+- Migration support through Flyway.										--Edward--
+
+- P4Admin web-interface.												--Alex--
+- Auto confirguration for PostgreSQL database provisioning for P4Admin.	--Alex--
+
+- Client Service.														--Gabriel & Estella--
+- Login page.															--Gabriel--
+- Tagging page.															--Gabriel--
+- Integration for adnotation component for Konva.js (static integration).--Gabriel--
+- Functionalities for tagging window :"select", "create-point",			--Gabriel--
+ "create-box", "create-polygon", "create-line", "create-expanding-line",
+ "show-mask" (static).
+
+- Tagging Service.														--Gabriel & Estella--
+
+- Query Service.														--Gabriel & Estella--
+- COCO Datatype Controller for COCO database queries.					--Alex--
+- COCO dataype manipulation features.									--Alex--
+
+- COCO database (MongoDB).												--Estella--
+- Importing of COCO datatypes and Model classes with coresponding properties.		--Estella--
+
+### Changed
+- Started using password encryption with BcryptEncoding encoding.		--Edward--
+- Started using Zuul routing in Gateway instead of Spring routing for MVC support.	--Edward--
