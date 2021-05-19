@@ -1,20 +1,31 @@
+Members of the team:
+-	Gabriel Petre – 343 C3
+-	Alexandru Petre – 342 C3
+-	Edward-Andrei Codarcea – 343 C3
+-	Estella-Paula Negoita – 343 C1
+
+
 # Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-- Set-up Log database (PostgreSQL).																	--Alex--
-- Implement Log Model with coresponding properties (timestamp, service, operation, parameters).		--Estella--
-- Add Log Controller for log database queries.														--Estella--
-- Introduce log entries manipulation functionalities: add, remove, update.							--Estella--
+## [2.0.0] - 2021-22-05
+### Added
+- Set-up Log database (PostgreSQL // ElasticSearch).									   			--Edward--
+- Implement Log Model with coresponding properties (timestamp, service, operation, parameters).		--Edward--
+- Add Log Controller for log database queries.														--Edward--
+- Introduce log entries manipulation functionalities: add, remove.      							--Edward--
 
 - Form validation for registration screen (user credentials).										--Estella--
 - Functionalty to add new user to database.															--Estella--
-- Functionalty to remove user from database.														--Estella--
 - New user registration page.																		--Estella--
 
+- Image repository page.                                                                            --Gabriel & Estella--
+- User tagged images repository page.                                                               --Gabriel & Estella--
+
+- Mongo-express functionality for COCOdb                                                            --Gabriel--
 - Introduce dynamic mapping for tagging window functionalities "select", "create-point",			--Alex--
  "create-box", "create-polygon", "create-line", "create-expanding-line",
  "show-mask".
@@ -26,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Service repository separation.																	--Alex--
 - Add CI/CD functionality.																			--Alex--
 
-## [1.0.0] - 2021-09-08
+## [1.0.0] - 2021-15-05
 ### Added
 - Gateway Service.														--Gabriel  & Estella--			
 - Login Controller for log in functionality.							--Edward--
