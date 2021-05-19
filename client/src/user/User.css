@@ -1,5 +1,32 @@
 .user-container{
-    padding: 5px;
-    margin: 5px;
+    padding-top: 5px;
+    margin-top: 5px;
     box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.card-columns {
+}
+
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 4!important;
+    }
+}
+
+.user-card-container{
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.user-details-container{
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tagged-images-title-container{
+    font-size: 30px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: #1d2124;
 }
