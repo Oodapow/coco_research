@@ -13,7 +13,7 @@ if __name__ == '__main__':
     api = Api(app)
         
     api.add_resource(DataPut,       '/data/put/<db>/<col>/<key>',       '/data/put/<db>/<col>')
-    api.add_resource(DataGet,       '/data/get/<db>/<col>/<key>',       '/data/get/<db>/<col>')
+    api.add_resource(DataGet,       '/data/get/<db>/<col>/<key>',       '/data/get/<db>/<col>/<int:limit>/<int:skip>')
     api.add_resource(DataUpdate,    '/data/update/<db>/<col>/<key>',    '/data/update/<db>/<col>')
     api.add_resource(DataDelete,    '/data/delete/<db>/<col>/<key>',    '/data/delete/<db>/<col>')
     api.add_resource(DataImport,    '/data/import/<db>')

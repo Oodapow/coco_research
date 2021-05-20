@@ -70,14 +70,16 @@ class DataGet(Resource):
             col = db[kargs['col']]
             if 'key' in kargs:
                 key = make_id(kargs['key'])
-                res = col.find_one({'_id': key}, {'_id': 0})
+                res = col.find_one({'_id': key})
                 if res:
                     return jsonify(res)
                 else:
                     raise KeyNotFound(str(key))
             else:
+                limit = kargs['limit']
+                skip = kargs['skip']
                 data = request.get_json()
-                res = list(col.find(data, {'_id': 1}))
+                res = list(col.find(data, limit=limit, skip=skip))
                 if res:
                     return jsonify(res)
                 else:
