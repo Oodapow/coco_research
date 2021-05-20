@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TagginServiceApplication {
+public class TaggingServiceApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(TagginServiceApplication.class, args);
+		SpringApplication.run(TaggingServiceApplication.class, args);
 	}
 
 }
