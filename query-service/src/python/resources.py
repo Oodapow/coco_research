@@ -18,8 +18,53 @@ def make_id(key):
 def make_cl():
     return MongoClient(os.environ['MONGO_URI'])
 
-class Data(Resource):
-    def get(self, **kargs):
+class DataImport(Resource):
+    def post(self, **kargs):
+        data = request.get_json()
+        n = 0
+        with make_cl() as cl:
+            db = cl[kargs['db']]
+            for k,v in data.items():
+                col = db[k]
+                if type(v) == list:
+                    r = col.insert_many(v)
+                    n += len(r.inserted_ids)
+                else:
+                    r = col.insert_one(v)
+                    n += 1
+        return jsonify({'inserted': n})
+
+class DataPut(Resource):
+    def post(self, **kargs):
+        data = request.get_json()
+        with make_cl() as cl:
+            db = cl[kargs['db']]
+            col = db[kargs['col']]
+
+            if 'key' in kargs:
+                key = make_id(kargs['key'])
+                data = {'_id': key, **data}
+                try:
+                    col.insert_one(data)
+                except errors.DuplicateKeyError:
+                    raise DuplicateKeyError(kargs['key'])
+            else:
+                col.insert_one(data)
+            return jsonify(data)
+
+class DataDelete(Resource):
+    def post(self, **kargs):
+        with make_cl() as cl:
+            db = cl[kargs['db']]
+            col = db[kargs['col']]
+            if 'key' in kargs:
+                key = make_id(kargs['key'])
+                col.delete_one({'_id': key})
+            else:
+                db.drop_collection(col)
+
+class DataGet(Resource):
+    def post(self, **kargs):
         with make_cl() as cl:
             db = cl[kargs['db']]
             col = db[kargs['col']]
@@ -38,26 +83,7 @@ class Data(Resource):
                 else:
                     raise NoDataMatch(data, kargs['db'], kargs['col'])
 
-    def put(self, **kargs):
-        start = time.time()
-        data = request.get_json()
-        with make_cl() as cl:
-            db = cl[kargs['db']]
-            col = db[kargs['col']]
-
-            if 'key' in kargs:
-                key = make_id(kargs['key'])
-                data = {'_id': key, **data}
-                try:
-                    col.insert_one(data)
-                except errors.DuplicateKeyError:
-                    raise DuplicateKeyError(kargs['key'])
-            else:
-                col.insert_one(data)
-            end = time.time()
-            print(end-start)
-            return jsonify(data)
-
+class DataUpdate(Resource):
     def post(self, **kargs):
         data = request.get_json()
         with make_cl() as cl:
@@ -81,13 +107,3 @@ class Data(Resource):
                     if not col.update_one(search, {'$set': d}).matched_count:
                         raise KeyNotFound(str(key))
         return jsonify(data)
-
-    def delete(self, **kargs):
-        with make_cl() as cl:
-            db = cl[kargs['db']]
-            col = db[kargs['col']]
-            if 'key' in kargs:
-                key = make_id(kargs['key'])
-                col.delete_one({'_id': key})
-            else:
-                db.drop_collection(col)

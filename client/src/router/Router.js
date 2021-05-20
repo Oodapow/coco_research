@@ -4,6 +4,7 @@ import TaggerNavBar from "../navigation/Navbar";
 import Repository from "../repository/Repository";
 import AnnotateComponent from "../annotate/AnnotateComponent";
 import User from "../user/User";
+import COCOIEComponent from "../import_export/COCOIE";
 
 const Router = () => {
     return (
@@ -13,6 +14,7 @@ const Router = () => {
                     <Route exact path="/repository" component={Repository}/>
                     <Route exact path="/user" component={User}/>
                     <Route exact path="/annotate" component={AnnotateComponent}/>
+                    <Route exact path="/coco" component={COCOIEComponent}/>
                     <Route exact path="/" component={AnnotateComponent}/>
                     <Route>
                         <div>Error</div>

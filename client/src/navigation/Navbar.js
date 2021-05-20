@@ -11,6 +11,7 @@ const TaggerNavBar = () => {
                     <NavLink href="/annotate" active={setActive("annotate") || setActive("")}>Annotate</NavLink>
                     <NavLink href="/repository" active={setActive("repository")}>Repository</NavLink>
                     <NavLink href="/user" active={setActive("user")}>Your Tagged Images</NavLink>
+                    <NavLink href="/coco" active={setActive("coco")}>COCO Import</NavLink>
                 </Nav>
             </Navbar>
         </>
