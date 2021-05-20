@@ -3,20 +3,6 @@ import {Form, Container, Button} from "react-bootstrap";
 
 const superagent = require('superagent');
 
-// Example POST method implementation:
-async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then((response) => response.json())
-        .then((e) => console.log(e))
-}
-
 const COCOIEComponent = () => {
     const [file, setFile] = useState(null);
     return <Container className={"fluid d-flex justify-content-left user-container"}>

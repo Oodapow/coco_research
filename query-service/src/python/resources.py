@@ -79,7 +79,10 @@ class DataGet(Resource):
                 limit = kargs['limit']
                 skip = kargs['skip']
                 data = request.get_json()
-                res = list(col.find(data, limit=limit, skip=skip))
+                if limit == 0:
+                    res = list(col.find(data, skip=skip))
+                else:
+                    res = list(col.find(data, limit=limit, skip=skip))
                 if res:
                     return jsonify(res)
                 else:

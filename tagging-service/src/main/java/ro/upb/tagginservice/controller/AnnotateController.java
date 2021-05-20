@@ -1,34 +1,32 @@
 package ro.upb.tagginservice.controller;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ro.upb.tagginservice.model.AnnotateModel;
+import org.springframework.web.bind.annotation.*;
+import ro.upb.tagginservice.model.annotate.AnnotateModel;
+import ro.upb.tagginservice.service.QueryService;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/annotate")
 @Slf4j
 public class AnnotateController {
-    private final HttpClient httpClient;
-    @GetMapping("/data/get/{db}/{col}/{key}")
-    AnnotateModel getInitial(@PathVariable String col, @PathVariable String db){
-        HttpRequest request = HttpRequest.newBuilder()
-                .POST()
-                .uri()
-                .header()
+
+    @NonNull
+    private final QueryService queryService;
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/data/get/{db}")
+    AnnotateModel getInitial(@PathVariable String db, @RequestBody(required = false) Map<Object, Object> data){
+        return AnnotateModel.builder()
+                .regionList(queryService.getCategories(db))
+                .taskDescription(queryService.getDescription(db))
+                .annotateImageModelList(queryService.getImages(db))
                 .build();
     }
+
+
 
 }
