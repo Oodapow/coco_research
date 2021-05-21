@@ -1,17 +1,19 @@
 package ro.upb.tagginservice.model.annotate;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
+
 @Getter
 @Setter
-@Builder
-public class AnnotateImageModel {
+@ToString
+public class AnnotatePostModel {
     String src;
-    String name;
-    String imageId;
+    long imageId;
     String _id;
+    String name;
+    AnnotatePixelSizeImageModel pixelSize;
     List<AnnotateRegionModel> regions;
 }

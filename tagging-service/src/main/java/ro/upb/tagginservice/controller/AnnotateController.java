@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ro.upb.tagginservice.model.annotate.AnnotateModel;
+import ro.upb.tagginservice.model.annotate.AnnotatePostModel;
 import ro.upb.tagginservice.service.QueryService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,9 +19,10 @@ public class AnnotateController {
 
     @NonNull
     private final QueryService queryService;
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/data/get/{db}")
-    AnnotateModel getInitial(@PathVariable String db, @RequestBody(required = false) Map<Object, Object> data){
+    AnnotateModel getInitial(@PathVariable String db) {
         return AnnotateModel.builder()
                 .regionList(queryService.getCategories(db))
                 .taskDescription(queryService.getDescription(db))
@@ -27,6 +30,12 @@ public class AnnotateController {
                 .build();
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/data/post/{db}")
+    String save(@PathVariable String db, @RequestBody(required = true) List<AnnotatePostModel> annotatePostModel) {
+        System.out.println(annotatePostModel);
+        queryService.saveAnnotations(db, annotatePostModel);
+        return "ok";
+    }
 
 }

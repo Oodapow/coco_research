@@ -3,10 +3,12 @@ package ro.upb.tagginservice.model.annotate;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
+@ToString
 public class AnnotateRegionModel {
     String cls;                     //: "Cat"
     String color;                   //: "#2196f3"
@@ -19,4 +21,5 @@ public class AnnotateRegionModel {
     double x;                       //: 0.14210526315789473
     double y;                       //: 0.14736842105263157
     String key;
+    long categoryId;
 }

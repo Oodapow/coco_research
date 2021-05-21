@@ -88,6 +88,17 @@ class DataGet(Resource):
                 else:
                     raise NoDataMatch(data, kargs['db'], kargs['col'])
 
+class DataGetLastId(Resource):
+    def post(self, **kargs):
+        with make_cl() as cl:
+            db = cl[kargs['db']]
+            col = db[kargs['col']]
+            res = list(col.find().sort({"id":-1}).limit(1))
+            if res:
+                return jsonify(res)
+            else:
+                raise NoDataMatch("", kargs['db'], kargs['col'])
+
 class DataUpdate(Resource):
     def post(self, **kargs):
         data = request.get_json()

@@ -15,7 +15,9 @@ const AnnotateComponent = () => {
                 .set('Content-Type', 'application/json')
                 .end((err, res) => {
                     console.log(res)
-                    setTestImages(res.body)
+                    if (res !== undefined) {
+                        setTestImages(res.body);
+                    }
                 })
         , []);
 
@@ -52,6 +54,13 @@ const AnnotateComponent = () => {
                     }
                     onExit={(e) => {
                         console.log(e)
+                        superagent
+                            .post('http://localhost:8082/annotate/data/post/instances')
+                            .send(e.images)
+                            .set('Content-Type', 'application/json')
+                            .end((err, res) => {
+                                console.log(res)
+                            })
                     }}
                     regionClsList={testImages.regionList}
                 />}
