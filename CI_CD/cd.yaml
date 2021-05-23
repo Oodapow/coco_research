@@ -11,11 +11,7 @@ steps:
     displayName: "Start PSQL Server"
   
   - script: |
-      docker run --rm -t -v $(Build.Repository.LocalPath):/app --link postgresql_sevice:postgresql_sevice --workdir /app maven mvn -f pom.xml clean package
-    env:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql_sevice:5432/tagger-userdb
-      SPRING_DATASOURCE_USERNAME: postgresIdp
-      SPRING_DATASOURCE_PASSWORD: postgres1
+      docker run --rm -t -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql_sevice:5432/tagger-userdb -e SPRING_DATASOURCE_USERNAME=postgresIdp -e SPRING_DATASOURCE_PASSWORD=postgres1 -v $(Build.Repository.LocalPath):/app --link postgresql_sevice:postgresql_sevice --workdir /app maven mvn -f pom.xml clean package
     displayName: "Build and Test Java"
 
   - script: |
