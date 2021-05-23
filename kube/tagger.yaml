@@ -162,11 +162,11 @@ spec:
       - name: query
         image: oodapow/coco_query
         env:
-        - name: MONGO_INITDB_ROOT_PASSWORD
+        - name: MONGO_URI
           valueFrom:
             secretKeyRef:
               name: mongo-secret
-              key: password
+              key: uri
         ports:
         - containerPort: 27017
         volumeMounts:
