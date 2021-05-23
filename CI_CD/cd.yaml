@@ -21,4 +21,8 @@ steps:
   - script: |
       docker login -u $(user) -p $(password)
     displayName: "Docker Login"
-
+  
+  - script: |
+      cd gateway
+      docker build -t oodapow/coco_gateway
+      docker push oodapow/coco_gateway
