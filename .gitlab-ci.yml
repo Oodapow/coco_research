@@ -1,0 +1,6 @@
+pr:
+  - master
+  - releases/*
+
+before_script:
+  - docker run --rm -d --name="postgresql_sevice" -e POSTGRES_DB="tagger-userdb" -e POSTGRES_USER="postgresIdp" -e POSTGRES_PASSWORD="postgres1" -e PGDATA="/var/lib/postgresql/data/pgdata" postgres:9.6
