@@ -148,6 +148,20 @@ iframe {
   line-height: 1.5;
 }
 
+.txt2 {
+  font-family: Poppins-Regular;
+  font-size: 20px;
+  color: #ffabab;
+  line-height: 1.5;
+}
+
+.txt3 {
+  font-family: Poppins-Regular;
+  font-size: 22px;
+  color: #61ff00;
+  line-height: 1.5;
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/

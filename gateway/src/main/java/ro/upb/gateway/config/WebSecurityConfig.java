@@ -67,7 +67,7 @@ public class WebSecurityConfig {
                     new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
             http
                     .authorizeRequests()
-                    .antMatchers("/js/**", "/css/**", "/image/**", "/vendor/**", "/fonts/**").permitAll()
+                    .antMatchers("/js/**", "/css/**", "/image/**", "/vendor/**", "/fonts/**", "/signup").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
