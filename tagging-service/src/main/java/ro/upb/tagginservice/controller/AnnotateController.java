@@ -20,7 +20,7 @@ public class AnnotateController {
     @NonNull
     private final QueryService queryService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081"})
     @GetMapping("/data/get/{db}")
     AnnotateModel getInitial(@PathVariable String db) {
         log.info("Get Stuff");
@@ -31,7 +31,7 @@ public class AnnotateController {
                 .build();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081"})
     @PostMapping("/data/post/{db}")
     String save(@PathVariable String db, @RequestBody(required = true) List<AnnotatePostModel> annotatePostModel) {
         System.out.println(annotatePostModel);

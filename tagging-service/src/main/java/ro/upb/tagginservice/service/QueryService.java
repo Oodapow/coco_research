@@ -73,7 +73,7 @@ public class QueryService {
     public List<AnnotateImageModel> getImages(String db) {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(buildFormDataFromMap(null))
-                .uri(URI.create(queryServiceUri + "/data/get/" + db + "/images/20" + "/0"))
+                .uri(URI.create(queryServiceUri + "/data/get/" + db + "/images/10" + "/0"))
                 .header("Content-Type", "application/json")
                 .build();
         HttpResponse<String> response;
