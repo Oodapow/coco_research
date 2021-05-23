@@ -11,7 +11,7 @@ const AnnotateComponent = () => {
     useEffect(
         () =>
             superagent
-                .get('http://localhost:8082/annotate/data/get/instances')
+                .get('http://localhost:8081/tagging-service/api/annotate/data/get/instances')
                 .set('Content-Type', 'application/json')
                 .end((err, res) => {
                     console.log(res)
@@ -55,7 +55,7 @@ const AnnotateComponent = () => {
                     onExit={(e) => {
                         console.log(e)
                         superagent
-                            .post('http://localhost:8082/annotate/data/post/instances')
+                            .post('http://localhost:8081/tagging-service/api/annotate/data/post/instances')
                             .send(e.images)
                             .set('Content-Type', 'application/json')
                             .end((err, res) => {

@@ -40,9 +40,4 @@ public class LoginController {
         userService.createNewUser(userSignupModel.getUsername(), encryptedPassword);
         return new ModelAndView("index", "msg", "Account created successfully!");
     }
-
-    @GetMapping("/")
-    public String root() {
-        return "indexRoot";
-    }
 }
