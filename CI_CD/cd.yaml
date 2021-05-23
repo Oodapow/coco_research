@@ -24,12 +24,14 @@ steps:
   
   - script: |
       cd $(Build.Repository.LocalPath)/gateway
+      chmod +x run.sh
       docker build -t $(user)/coco_gateway .
       docker push $(user)/coco_gateway
     displayName: "Build and Push Docker Gateway"
   
   - script: |
       cd $(Build.Repository.LocalPath)/tagging-service
+      chmod +x run.sh
       docker build -t $(user)/coco_tagging .
       docker push $(user)/coco_tagging
     displayName: "Build and Push Docker Tagging"
@@ -42,6 +44,7 @@ steps:
   
   - script: |
       cd $(Build.Repository.LocalPath)/user-service
+      chmod +x run.sh
       docker build -t $(user)/coco_user .
       docker push $(user)/coco_user
     displayName: "Build and Push Docker User"
