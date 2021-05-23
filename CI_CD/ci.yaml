@@ -11,7 +11,8 @@ steps:
     displayName: "Start PSQL Server"
   
   - script: |
-      docker run --rm -t -v  $(Build.Repository.LocalPath):/app --link postgresql_sevice:postgresql_sevice maven
+      docker run --rm -t -v  $(Build.Repository.LocalPath):/app --link postgresql_sevice:postgresql_sevice maven mvn /app/pom.xml clean package
+    displayName: "Build and Test Java"
 
   - script: |
       docker stop postgresql_sevice
