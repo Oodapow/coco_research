@@ -1,0 +1,7 @@
+pr:
+  - master
+  - releases/*
+
+steps:
+  - script: |
+      ls -al
