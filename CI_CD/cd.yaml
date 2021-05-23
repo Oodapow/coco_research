@@ -2,6 +2,23 @@ pr:
   - master
   - releases/*
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 steps:
   - script: |
-      ls -al
+      docker run --rm -d --name="postgresql_sevice" -e POSTGRES_DB="tagger-userdb" -e POSTGRES_USER="postgresIdp" -e POSTGRES_PASSWORD="postgres1" -e PGDATA="/var/lib/postgresql/data/pgdata" postgres:9.6
+    displayName: "Start PSQL Server"
+  
+  - script: |
+      docker run --rm -t -v $(Build.Repository.LocalPath):/app --link postgresql_sevice:postgresql_sevice --workdir /app maven mvn -f pom.xml clean package
+    displayName: "Build and Test Java"
+
+  - script: |
+      docker stop postgresql_sevice
+    displayName: "Stop PSQL Server"
+
+  - script: |
+      docker login -u $(user) -p $(password)
+    displayName: "Docker Login"
+
