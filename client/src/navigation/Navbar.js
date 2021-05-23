@@ -13,6 +13,10 @@ const TaggerNavBar = () => {
                     <NavLink href={process.env.PUBLIC_URL + "/repository"}
                              active={setActive("repository")}>Repository</NavLink>
                     <NavLink href={process.env.PUBLIC_URL + "/user"} active={setActive("user")}>Tagged-Images</NavLink>
+
+                </Nav>
+                <Nav>
+                    <NavLink className={"pull-right"} href={"/logout"} >Logout</NavLink>
                 </Nav>
             </Navbar>
         </>

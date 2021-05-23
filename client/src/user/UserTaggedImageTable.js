@@ -44,7 +44,7 @@ const UserTaggedImageTable = (props) => {
                 <Container className={"d-flex justify-content-center"}>
                     <CardColumns>
                         {props.userTaggedImages.slice(start, nextSize(props.userTaggedImages, start)).map(x => (
-                            <UserTaggedImageEntry element={x}/>))}
+                            <UserTaggedImageEntry key={x.key} element={x}/>))}
                     </CardColumns>
                 </Container>
             </>

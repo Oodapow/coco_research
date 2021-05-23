@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './User.css';
 import UserTaggedImageTable from "./UserTaggedImageTable";
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {Card, Col, Container, Row, Spinner} from "react-bootstrap";
 import COCOIEComponent from "../import_export/CocoImportComponent";
 
-const imageUrl = "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_cool_summer_slideshow/1800x1200_dog_cool_summer_other.jpg?resize=750px:*";
+const imageUrl = "https://media-exp1.licdn.com/dms/image/C4E03AQFXYEtSj4j0-A/profile-displayphoto-shrink_200_200/0/1570664194027?e=1626307200&v=beta&t=nYS31zD5tvCN3-vuUTGt4aqJJoK0sF4GF7KJrxIl9Hg";
+
+const superagent = require('superagent');
+
+const db = "instances_val2014";
 
 const userData = {
     userName: "Estella",
@@ -25,12 +29,25 @@ const userData = {
     })()
 }
 const User = () => {
+    const [testImages, setTestImages] = useState(undefined);
+
+    useEffect(
+        () =>
+            superagent
+                .get('http://localhost:8081/api/tagging-service/annotate/data/get/'+db)
+                .set('Content-Type', 'application/json')
+                .end((err, res) => {
+                    console.log(res)
+                    if (res !== undefined) {
+                        setTestImages(res.body);
+                    }
+                })
+        , []);
+
+
     return (
         <Container className={"fluid d-flex justify-content-left user-container"}>
             <Row>
-                <Col md={12} className={"mb-4 mt-2"}>
-                    <COCOIEComponent/>
-                </Col>
                 <Col md={5} >
                     <Card className={"user-card-container"}>
                         <Card.Img variant="top" src={userData.userImage}/>
@@ -74,7 +91,13 @@ const User = () => {
                     </Container>
                 </Col>
                 <Col md={12}>
-                    <UserTaggedImageTable userTaggedImages={userData.userTaggedImages}/>
+                    {testImages === undefined || testImages === null || testImages.annotateImageModelList == null
+                        ?
+                        <Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        :<UserTaggedImageTable userTaggedImages={testImages.annotateImageModelList}/>}
+
                 </Col>
             </Row>
         </Container>

@@ -25,7 +25,7 @@ const AnnotateComponent = () => {
 
     return (
         <div className='annotator'>
-            {testImages === undefined || testImages === null
+            {testImages === undefined || testImages === null || testImages.annotateImageModelList == null
                 ?
                 <Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>

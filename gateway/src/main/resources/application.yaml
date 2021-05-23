@@ -14,6 +14,8 @@ resttemplate:
   password: n>$E46^,rJYT!Tft&H44)`s`c>RE3]qs2y(L,ChYkiWLuL@tmy
 
 zuul:
+  host:
+    socket-timeout-millis: 30000
   ignored-patterns: /login, /logout, /signup, /image/**, /vendor/**, /fonts/**, /css/**, /js/**
   routes:
     user-service:

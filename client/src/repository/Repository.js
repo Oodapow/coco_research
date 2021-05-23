@@ -1,19 +1,20 @@
 import React, {useState} from 'react';
 import './Repository.css';
-import {Table} from "react-bootstrap";
+import {Col, Table} from "react-bootstrap";
 import RepositoryElement from "./RepositoryElement";
+import COCOIEComponent from "../import_export/CocoImportComponent";
 
 const repositoryTable = [
-    {id: 1, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
-    {id: 2, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
-    {id: 3, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
-    {id: 4, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
-    {id: 5, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
-    {id: 6, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
-    {id: 7, repoName: 'Macaroane', description: 'Macaroane', numberOfImages: 200, current: false},
+    {id: 1, repoName: 'instances_val2014', description: 'instances_val2014', numberOfImages: 200, current: false},
+    {id: 2, repoName: 'instances_val2015', description: 'instances_val2015', numberOfImages: 200, current: false},
+    {id: 3, repoName: 'instances_val2016', description: 'instances_val2016', numberOfImages: 200, current: false},
+    {id: 4, repoName: 'instances_val2017', description: 'instances_val2017', numberOfImages: 200, current: false},
+    {id: 5, repoName: 'instances_val2018', description: 'instances_val2018', numberOfImages: 200, current: false},
+    {id: 6, repoName: 'instances_val2019', description: 'instances_val2019', numberOfImages: 200, current: false},
+    {id: 7, repoName: 'instances_val2020', description: 'instances_val2020', numberOfImages: 200, current: false},
     {
         id: 8,
-        repoName: 'Macaroane',
+        repoName: 'instances_val2020',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has' +
             ' been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
             'of type and scrambled it to make a type specimen book. It has survived not only five centuries, but ' +
@@ -28,6 +29,10 @@ const Repository = () => {
 
     return (
         <div className='repository-table-container'>
+
+            <Col md={12} className={"mb-4 mt-2"}>
+                <COCOIEComponent/>
+            </Col>
             <Table striped bordered hover size='sm'>
                 <thead>
                 <tr>

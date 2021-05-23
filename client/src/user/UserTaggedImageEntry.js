@@ -1,6 +1,6 @@
 import React from "react";
 import './UserTaggedImageEntry.css';
-import {Card ,CardImg} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 const UserTaggedImageEntry = (props) => {
     const elem = props.element;
     return (
@@ -10,7 +10,8 @@ const UserTaggedImageEntry = (props) => {
                 <Card.Body>
                     <Card.Title>{elem !== undefined? elem.name :""}</Card.Title>
                     <Card.Text>
-                        Regions : {elem !== undefined? elem.regions: ""}
+                        Regions<br/>
+                        {elem !== undefined? elem.regions.map(x=> x.cls): ""}
                     </Card.Text>
                 </Card.Body>
             </Card>

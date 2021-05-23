@@ -57,11 +57,6 @@ public class WebSecurityConfig {
         }
 
         @Override
-        public void configure(WebSecurity web) {
-            web.ignoring().antMatchers("/js/**", "/css/**", "/image/**", "/vendor/**", "/fonts/**");
-        }
-
-        @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable().headers().frameOptions().sameOrigin().addHeaderWriter(
                     new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
@@ -73,7 +68,7 @@ public class WebSecurityConfig {
                     .formLogin()
                     .loginPage("/login").permitAll()
                     .failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/app")
+                    .defaultSuccessUrl("/app/user")
                     .and()
                     .logout()
                     .permitAll();
