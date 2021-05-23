@@ -109,7 +109,7 @@ public class QueryService {
     public List<AnnotateRegionModel> getAnnotations(String db, String imageId, int width, int height) throws JsonProcessingException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(buildFormDataFromMap(objectMapper.writeValueAsString(new ImageId(Long.valueOf(imageId)))))
-                .uri(URI.create(queryServiceUri + "/data/get/" + db + "/annotations/1" + "/0"))
+                .uri(URI.create(queryServiceUri + "/data/get/" + db + "/annotations/0" + "/0"))
                 .header("Content-Type", "application/json")
                 .build();
         HttpResponse<String> response;
@@ -194,6 +194,24 @@ public class QueryService {
         });
 
         return "";
+    }
+
+    public String importData(String fileName, String data) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(buildFormDataFromMap(data))
+                .uri(URI.create(queryServiceUri + "/data/import/"+fileName))
+                .header("Content-Type", "application/json")
+                .build();
+        HttpResponse<String> response;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            String resp =  response.body();
+            return resp;
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
