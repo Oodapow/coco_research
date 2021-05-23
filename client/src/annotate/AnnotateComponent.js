@@ -5,13 +5,15 @@ import {Spinner} from "react-bootstrap";
 
 const superagent = require('superagent');
 
+const db = "instances_val2014";
+
 const AnnotateComponent = () => {
     const [count, setCount] = useState(0);
     const [testImages, setTestImages] = useState(undefined);
     useEffect(
         () =>
             superagent
-                .get('http://localhost:8082/annotate/data/get/instances')
+                .get('http://localhost:8082/annotate/data/get/'+db)
                 .set('Content-Type', 'application/json')
                 .end((err, res) => {
                     console.log(res)
@@ -55,7 +57,7 @@ const AnnotateComponent = () => {
                     onExit={(e) => {
                         console.log(e)
                         superagent
-                            .post('http://localhost:8082/annotate/data/post/instances')
+                            .post('http://localhost:8082/annotate/data/post/'+db)
                             .send(e.images)
                             .set('Content-Type', 'application/json')
                             .end((err, res) => {
