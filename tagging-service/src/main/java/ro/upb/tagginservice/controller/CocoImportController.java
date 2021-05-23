@@ -14,7 +14,7 @@ public class CocoImportController {
     @NonNull
     private final QueryService queryService;
 
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://gateway-service"})
     @PostMapping("/data/import/{fileName}")
     public String importData(@PathVariable String fileName, @RequestBody String body){
         System.out.println("Start Import");

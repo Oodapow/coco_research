@@ -17,14 +17,14 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         var user = restTemplate
-                .getForObject("http://localhost:8081/api/user-service/user/{username}", User.class, username);
+                .getForObject("http://gateway-service/api/user-service/user/{username}", User.class, username);
         return Optional.ofNullable(user);
     }
 
     public boolean createNewUser(String username, String encryptedPassword) {
         HttpEntity<UserWithoutIdModel> request = new HttpEntity<>(new UserWithoutIdModel(username, encryptedPassword));
         var user = restTemplate
-                .postForObject("http://localhost:8081/api/user-service/user/register", request, User.class);
+                .postForObject("http://gateway-service/api/user-service/user/register", request, User.class);
         return true;
     }
 }

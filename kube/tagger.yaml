@@ -422,12 +422,11 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: test-network-policy
-  namespace: default
+  name: mongo-network-policy
 spec:
   podSelector:
     matchLabels:
-      role: db
+      app: mongo
   policyTypes:
   - Ingress
   - Egress
@@ -435,9 +434,31 @@ spec:
   - from:
     - podSelector:
         matchLabels:
-          role: frontend
+          app: query
   egress:
   - to:
     - podSelector:
         matchLabels:
-          role: frontend
+          app: query
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: psql-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: postgres
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: user
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: user
