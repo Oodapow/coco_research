@@ -19,4 +19,4 @@ if __name__ == '__main__':
     api.add_resource(DataDelete,    '/data/delete/<db>/<col>/<key>',    '/data/delete/<db>/<col>')
     api.add_resource(DataImport,    '/data/import/<db>')
     app.json_encoder = Encoder
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0')
