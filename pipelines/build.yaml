@@ -1,0 +1,16 @@
+pr:
+  - master
+  - releases/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+
+  - script: |
+      docker run --rm -d --name="postgresql_sevice" -e POSTGRES_DB="tagger-userdb" -e POSTGRES_USER="postgresIdp" -e POSTGRES_PASSWORD="postgres1" -e PGDATA="/var/lib/postgresql/data/pgdata" postgres:9.6
+    displayName: 'Start PSQL Container'
