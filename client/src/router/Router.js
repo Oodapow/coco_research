@@ -1,15 +1,13 @@
 import React from 'react';
-import {Route , BrowserRouter, Switch} from "react-router-dom";
-import TaggerNavBar from "../navigation/Navbar";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Repository from "../repository/Repository";
 import AnnotateComponent from "../annotate/AnnotateComponent";
 import User from "../user/User";
-import COCOIEComponent from "../import_export/CocoImportComponent";
 
 const Router = () => {
     return (
         <>
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <Switch>
                     <Route exact path="/repository" component={Repository}/>
                     <Route exact path="/user" component={User}/>
