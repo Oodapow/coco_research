@@ -182,6 +182,43 @@ spec:
       port: 5000
       targetPort: 5000
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tagging-deployment
+  labels:
+    app: tagging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tagging
+  template:
+    metadata:
+      labels:
+        app: tagging
+    spec:
+      containers:
+      - name: tagging
+        image: oodapow/coco_tagging
+        env:
+        - name: QUERY_SERVICE_URI
+          value: http://query-service:5000
+        ports:
+        - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tagging-service
+spec:
+  selector:
+    app: tagging
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 8082
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -263,6 +300,90 @@ spec:
     - protocol: TCP
       port: 5432
       targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+  labels:
+    app: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user
+        image: oodapow/coco_user
+        env:
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            secretKeyRef:
+              name: psql-secret
+              key: uri
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: psql-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: psql-secret
+              key: password
+        ports:
+        - containerPort: 8091
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user
+  ports:
+    - protocol: TCP
+      port: 8091
+      targetPort: 8091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  labels:
+    app: client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: client
+        image: oodapow/coco_client
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  selector:
+    app: client
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

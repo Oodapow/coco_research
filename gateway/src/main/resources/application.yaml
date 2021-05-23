@@ -21,15 +21,15 @@ zuul:
     user-service:
       path: /api/user-service/**
       service-id: user-service
-      url: http://localhost:8091
+      url: http://user-service:8091
       sensitive-headers:
     tagging-service:
       path: /api/tagging-service/**
       service-id: tagging-service
-      url: http://localhost:8082
+      url: http://tagging-service:8082
       sensitive-headers:
     client:
       path: /app/**
       service-id: client-service
-      url: http://localhost:3000/app/
+      url: http://client-service:5000/app/
       sensitive-headers:
