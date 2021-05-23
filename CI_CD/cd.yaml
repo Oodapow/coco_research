@@ -12,6 +12,8 @@ steps:
   
   - script: |
       docker run --rm -t -v $(Build.Repository.LocalPath):/app --link postgresql_sevice:postgresql_sevice --workdir /app maven mvn -f pom.xml clean package
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql_sevice:5432/tagger-userdb
     displayName: "Build and Test Java"
 
   - script: |

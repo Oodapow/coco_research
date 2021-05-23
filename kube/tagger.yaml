@@ -15,6 +15,7 @@ data:
   username: YWRtaW4=
   password: bW9uZ29hZG1pbg==
   db: YWRtaW4=
+  uri: bW9uZ29kYjovL2FkbWluOm1vbmdvYWRtaW5AbW9uZ28tc2VydmljZQ==
 kind: Secret
 type: Opaque
 metadata:
@@ -140,6 +141,41 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8081
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-deployment
+  labels:
+    app: query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: query
+  template:
+    metadata:
+      labels:
+        app: query
+    spec:
+      containers:
+      - name: query
+        image: oodapow/coco_query
+        env:
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: password
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data
+          name: mongo-data
+      volumes:
+      - name: mongo-data
+        persistentVolumeClaim:
+          claimName: mongo-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
