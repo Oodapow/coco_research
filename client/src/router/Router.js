@@ -4,6 +4,7 @@ import TaggerNavBar from "../navigation/Navbar";
 import Repository from "../repository/Repository";
 import AnnotateComponent from "../annotate/AnnotateComponent";
 import User from "../user/User";
+import COCOIEComponent from "../import_export/CocoImportComponent";
 
 const Router = () => {
     return (
