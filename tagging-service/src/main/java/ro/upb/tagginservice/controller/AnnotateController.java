@@ -23,6 +23,7 @@ public class AnnotateController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/data/get/{db}")
     AnnotateModel getInitial(@PathVariable String db) {
+        log.info("Get Stuff");
         return AnnotateModel.builder()
                 .regionList(queryService.getCategories(db))
                 .taskDescription(queryService.getDescription(db))

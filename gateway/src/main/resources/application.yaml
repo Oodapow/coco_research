@@ -1,0 +1,33 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: gateway-service
+logging:
+  level:
+    ro:
+      upb:
+        gateway: DEBUG
+
+resttemplate:
+  username: restTemplateUser
+  password: n>$E46^,rJYT!Tft&H44)`s`c>RE3]qs2y(L,ChYkiWLuL@tmy
+
+zuul:
+  ignored-patterns: /login, /logout, /signup, /image/**, /vendor/**, /fonts/**, /css/**, /js/**
+  routes:
+    user-service:
+      path: /api/user-service/**
+      service-id: user-service
+      url: http://localhost:8091
+      sensitive-headers:
+    tagging-service:
+      path: /api/tagging-service/**
+      service-id: tagging-service
+      url: http://localhost:8082
+      sensitive-headers:
+    client:
+      path: /app/**
+      service-id: client-service
+      url: http://localhost:3000/app/
+      sensitive-headers:

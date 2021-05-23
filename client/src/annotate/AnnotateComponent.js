@@ -13,7 +13,7 @@ const AnnotateComponent = () => {
     useEffect(
         () =>
             superagent
-                .get('http://localhost:8081/tagging-service/api/annotate/data/get/'+db)
+                .get('http://localhost:8081/api/tagging-service/annotate/data/get/'+db)
                 .set('Content-Type', 'application/json')
                 .end((err, res) => {
                     console.log(res)
@@ -25,7 +25,7 @@ const AnnotateComponent = () => {
 
     return (
         <div className='annotator'>
-            {testImages === undefined
+            {testImages === undefined || testImages === null
                 ?
                 <Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>
@@ -57,7 +57,7 @@ const AnnotateComponent = () => {
                     onExit={(e) => {
                         console.log(e)
                         superagent
-                            .post('http://localhost:8081/tagging-service/api/annotate/data/post/'+db)
+                            .post('http://localhost:8081/api/tagging-service/annotate/data/post/'+db)
                             .send(e.images)
                             .set('Content-Type', 'application/json')
                             .end((err, res) => {
