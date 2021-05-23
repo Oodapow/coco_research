@@ -45,3 +45,10 @@ steps:
       docker build -t $(user)/coco_user .
       docker push $(user)/coco_user
     displayName: "Build and Push Docker User"
+
+  - script: |
+      cd $(Build.Repository.LocalPath)/client
+      docker build -t $(user)/coco_client .
+      docker push $(user)/coco_client
+    displayName: "Build and Push Docker Client"
+
