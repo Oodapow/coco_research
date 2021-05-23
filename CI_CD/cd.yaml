@@ -23,6 +23,21 @@ steps:
     displayName: "Docker Login"
   
   - script: |
-      cd gateway
+      cd $(Build.Repository.LocalPath)/gateway
       docker build -t oodapow/coco_gateway
       docker push oodapow/coco_gateway
+  
+  - script: |
+      cd $(Build.Repository.LocalPath)/tagging-service
+      docker build -t oodapow/coco_tagging
+      docker push oodapow/coco_tagging
+  
+  - script: |
+      cd $(Build.Repository.LocalPath)/query-service
+      docker build -t oodapow/coco_query
+      docker push oodapow/coco_query
+  
+  - script: |
+      cd $(Build.Repository.LocalPath)/user-service
+      docker build -t oodapow/coco_user
+      docker push oodapow/coco_user
