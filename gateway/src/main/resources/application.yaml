@@ -31,5 +31,5 @@ zuul:
     client:
       path: /app/**
       service-id: client-service
-      url: http://client-service:5000/app/
+      url: http://client-service/app/
       sensitive-headers:
