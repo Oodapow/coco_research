@@ -15,7 +15,7 @@ public class CocoImportController {
     private final QueryService queryService;
 
     @CrossOrigin(origins = {"http://localhost", "http://gateway-service"})
-    @PostMapping("/data/import/{fileName}")
+    @PostMapping("/api/tagging-service/data/import/{fileName}")
     public String importData(@PathVariable String fileName, @RequestBody String body){
         System.out.println("Start Import");
         return queryService.importData(fileName,body);
