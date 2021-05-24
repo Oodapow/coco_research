@@ -13,6 +13,13 @@ resttemplate:
   username: restTemplateUser
   password: n>$E46^,rJYT!Tft&H44)`s`c>RE3]qs2y(L,ChYkiWLuL@tmy
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
 zuul:
   host:
     socket-timeout-millis: 30000
