@@ -34,7 +34,7 @@ const User = () => {
     useEffect(
         () =>
             superagent
-                .get('http://localhost:8081/api/tagging-service/annotate/data/get/'+db)
+                .get('http://localhost/api/tagging-service/annotate/data/get/'+db)
                 .set('Content-Type', 'application/json')
                 .end((err, res) => {
                     console.log(res)
