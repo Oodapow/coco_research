@@ -19,10 +19,10 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 60000
+            timeoutInMilliseconds: 300000
 zuul:
   host:
-    socket-timeout-millis: 30000
+    socket-timeout-millis: 300000
   ignored-patterns: /login, /logout, /signup, /image/**, /vendor/**, /fonts/**, /css/**, /js/**
   routes:
     user-service:
