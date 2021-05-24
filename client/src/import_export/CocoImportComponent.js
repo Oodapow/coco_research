@@ -19,7 +19,7 @@ const COCOIEComponent = () => {
                             onClick={() => {
                                 let fileName = file.name === undefined ? 'instances' : file.name.substring(0, file.name.length - 5);
                                 superagent
-                                    .post('http://localhost/data/import/' + fileName)
+                                    .post('http://localhost/api/data/import/' + fileName)
                                     .send(file)
                                     .set('Content-Type', 'application/json')
                                     .end((err, res) => {
